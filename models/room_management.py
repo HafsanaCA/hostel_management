@@ -60,7 +60,7 @@ class RoomManagement(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        """ Creates sequence number for rooms"""
+        """ Creates sequence number for rooms.."""
         for vals in vals_list:
             if vals.get('name', _('New')) == _('New'):
                 vals['name'] = (self.env['ir.sequence'].next_by_code('room.management'))
