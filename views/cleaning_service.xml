@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="cleaning_service_form_view" model="ir.ui.view">
+        <field name="name">Cleaning Service</field>
+        <field name="model">cleaning.service</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="new,assigned,done"/>
+                    <button name="action_assign" class="oe_highlight" string="Assign" type="object"
+                            invisible="state == 'assigned' or state == 'done'"
+                            groups="hostel_management.group_cleaning_staff, hostel_management.group_hostel_warden"/>
+                    <button name="action_complete" class="oe_highlight" string="Complete" type="object"
+                            invisible="state != 'assigned'"
+                            groups="hostel_management.group_cleaning_staff, hostel_management.group_hostel_warden"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="room_id"/>
+                            <field name="start_time"/>
+                        </group>
+                        <group>
+                            <field name="cleaning_staff" readonly="1"/>
+                            <field name="company_id" readonly="False"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="cleaning_service_tree_view" model="ir.ui.view">
+        <field name="name">cleaning.service.list</field>
+        <field name="model">cleaning.service</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="room_id"/>
+                <field name="start_time"/>
+                <field name="cleaning_staff"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+    <record id="cleaning_service_search_view" model="ir.ui.view">
+        <field name="name">cleaning.service.search</field>
+        <field name="model">cleaning.service</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="room_id"/>
+                <field name="start_time"/>
+                <field name="cleaning_staff"/>
+                <filter string="New" name="name" domain="[('state', '=','new')]"/>
+                <filter string="Assigned" name="name" domain="[('state', '=','assigned')]"/>
+                <filter string="Completed" name="name" domain="[('state', '=','done')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Cleaning Staff" name="cleaning_staff" context="{'group_by': 'cleaning_staff'}"/>
+                    <filter string="Company" name="company_id" context="{'group_by': 'company_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

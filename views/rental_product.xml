@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="rental_product_form_view" model="ir.ui.view">
+        <field name="name">Rental Products</field>
+        <field name="model">rental.product</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="price" widget="monetary"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="rental_product_tree_view" model="ir.ui.view">
+        <field name="name">rental.product.list</field>
+        <field name="model">rental.product</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="price" widget="monetary"/>
+            </list>
+        </field>
+    </record>
+    <record id="rental_product_search_view" model="ir.ui.view">
+        <field name="name">rental.product.search</field>
+        <field name="model">rental.product</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="price"/>
+                <group expand="0" string="Group By">
+                    <filter string="Price" name="price" context="{'group_by': 'price'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

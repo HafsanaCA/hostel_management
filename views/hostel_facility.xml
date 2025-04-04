@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="hostel_facility_form_view" model="ir.ui.view">
+        <field name="name">Hostel Facilities</field>
+        <field name="model">hostel.facility</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="charge" widget="monetary"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="hostel_facility_tree_view" model="ir.ui.view">
+        <field name="name">hostel.facility.list</field>
+        <field name="model">hostel.facility</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="charge" widget="monetary"/>
+            </list>
+        </field>
+    </record>
+    <record id="hostel_facility_search_view" model="ir.ui.view">
+        <field name="name">hostel.facility.search</field>
+        <field name="model">hostel.facility</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="charge"/>
+                <group expand="0" string="Group By">
+                    <filter string="Price" name="charge" context="{'group_by': 'charge'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <record id="ac_facility" model="hostel.facility">
+        <field name="name">AC</field>
+        <field name="charge">5000</field>
+    </record>
+    <record id="wifi_facility" model="hostel.facility">
+        <field name="name">WI-FI</field>
+        <field name="charge">60</field>
+    </record>
+    <record id="tv_facility" model="hostel.facility">
+        <field name="name">TV</field>
+        <field name="charge">1500</field>
+    </record>
+</odoo>

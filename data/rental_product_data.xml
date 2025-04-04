@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <record id="hostel_rental_product" model="rental.product">
+        <field name="name">Rent</field>
+        <field name="price">1000</field>
+    </record>
+</odoo>

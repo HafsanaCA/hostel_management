@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="hostel_room_form_view" model="ir.ui.view">
+        <field name="name">room.management.form</field>
+        <field name="model">room.management</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="empty,partial,cleaning,full"/>
+                    <button name="action_partial" class="oe_highlight" string="Partially Full" type="object"
+                            invisible="state != 'empty'"/>
+                    <button name="action_full" class="oe_highlight" string="Completed" type="object"
+                            invisible="state != 'partial'"/>
+                    <button name="action_create_monthly_invoice" string="Monthly Invoice" type="object"/>
+                </header>
+                <sheet>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="room_type"/>
+                            <field name="beds"/>
+                            <field name="rent" widget="monetary"/>
+                            <field name="total_rent" widget="monetary"/>
+                        </group>
+                        <group>
+                            <field name="currency_id"/>
+                            <field name="company_id"/>
+                            <field name="pending_amount"/>
+                            <field name="facility_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="student_ids" string="Students">
+                            <field name="student_ids" widget="one2many" mode="list" readonly="1">
+                                <list string="Students" editable="top" create="false" delete="false">
+                                    <field name="name"/>
+                                    <field name="email"/>
+                                    <field name="age"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter>
+                    <sheet>
+                        <group>
+                        </group>
+                    </sheet>
+                </chatter>
+            </form>
+        </field>
+    </record>
+    <record id="hostel_room_tree" model="ir.ui.view">
+        <field name="name">room.management.list</field>
+        <field name="model">room.management</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="room_type"/>
+                <field name="beds"/>
+                <field name="occupied_beds"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="total_rent" widget="monetary"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+    <record id="hostel_room_search_view" model="ir.ui.view">
+        <field name="name">room.management.search</field>
+        <field name="model">room.management</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="room_type"/>
+                <field name="beds"/>
+                <field name="rent"/>
+                <filter string="Available Rooms" name="name" domain="[('state', '!=','full')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Bed Count" name="beds" context="{'group_by': 'beds'}"/>
+                    <filter string="Room Type" name="room_type" context="{'group_by': 'room_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

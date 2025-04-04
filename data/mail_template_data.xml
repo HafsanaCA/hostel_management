@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="email_template_invoice" model="mail.template">
+            <field name="name">EMAIL FOR PAYMENT PROCEEDING</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="subject">Invoice {{ object.name }} from {{ object.company_id.name }}</field>
+            <field name="email_from">{{ (object.user_id.email) }}</field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="description">Invoice Confirmed : Proceeding to payment</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        <br/>
+                        <div style="margin: 0px; padding: 0px;">
+                            <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                                Dear Neha CA,
+                                <br/>
+                                <br/>
+                                We've provided the invoice details associated with the room rent in this mail. Please
+                                take a look at this and then you can proceed with the payment...
+                            </p>
+                        </div>
+                        <br/>
+                        <b>Invoice Details:</b>
+                        <br/>
+                        <br/>
+                        <table style="width:100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid black;">
+                                    <th style="text-align:left;">Description</th>
+                                    <th style="text-align:right;">Quantity</th>
+                                    <th style="text-align:right;">Unit Price</th>
+                                    <th style="text-align:right;">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="object.invoice_line_ids" t-as="line">
+                                    <tr>
+                                        <td>
+                                            <t t-out="line.name"/>
+                                        </td>
+                                        <td style="text-align:right;">
+                                            <t t-out="line.quantity"/>
+                                        </td>
+                                        <td style="text-align:right;">
+                                            <t t-out="format_amount(line.price_unit, object.currency_id)"/>
+                                        </td>
+                                        <td style="text-align:right;">
+                                            <t t-out="format_amount(line.price_subtotal, object.currency_id)"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <p>
+                            If you have any queries regarding the details provided in the invoice,do not hesitate
+                            to contact us...Feel free to reach out. We're always here to help you.
+                        </p>
+                        Do not hesitate to contact us if you have any questions.
+                        <br/>
+                        <br/>
+                        Sincerely,
+                        <br/>
+                        Administrator
+                    </p>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

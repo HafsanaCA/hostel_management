@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_move_form_inherit_student" model="ir.ui.view">
+        <field name="name">account.move.form.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <header>
+
+            </header>
+        </field>
+    </record>
+
+    <record id="hostel_facility_tree" model="ir.ui.view">
+        <field name="name">account.move.list.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_tree"/>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="invoice_date"/>
+                <field name="partner_id"/>
+            </list>
+        </field>
+    </record>
+</odoo>

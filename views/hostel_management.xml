@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="hostel_main_menu" name="Hostel" sequence="1"/>
+    <record id="action_hostel_room_menu" model="ir.actions.act_window">
+        <field name="name">Room Management</field>
+        <field name="res_model">room.management</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="hostel_room_management_menu"
+              name="Rooms"
+              parent="hostel_main_menu"
+              action="action_hostel_room_menu"/>
+    <record id="action_student_info_menu" model="ir.actions.act_window">
+        <field name="name">Student Information</field>
+        <field name="res_model">student.information</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="hostel_student_info_menu"
+              name="Students"
+              parent="hostel_main_menu"
+              action="action_student_info_menu"/>
+    <record id="action_hostel_facility_menu" model="ir.actions.act_window">
+        <field name="name">Hostel Facility</field>
+        <field name="res_model">hostel.facility</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="hostel_facility_menu"
+              name="Facilities"
+              parent="hostel_main_menu"
+              action="action_hostel_facility_menu"/>
+    <record id="action_leave_request_menu" model="ir.actions.act_window">
+        <field name="name">Leave Request</field>
+        <field name="res_model">leave.request</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="hostel_leave_request_menu"
+              name="Leave Request"
+              parent="hostel_main_menu"
+              action="action_leave_request_menu"/>
+    <record id="action_rent_product_menu" model="ir.actions.act_window">
+        <field name="name">Rental Products</field>
+        <field name="res_model">rental.product</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="hostel_rent_product_menu"
+              name="Rental Products"
+              parent="hostel_main_menu"
+              action="action_rent_product_menu"/>
+    <record id="action_cleaning_service_menu" model="ir.actions.act_window">
+        <field name="name">Cleaning Service</field>
+        <field name="res_model">cleaning.service</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="hostel_cleaning_service_menu"
+              name="Cleaning Service"
+              parent="hostel_main_menu"
+              action="action_cleaning_service_menu"/>
+</odoo>
