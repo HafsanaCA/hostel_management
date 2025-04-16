@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <record id="view_move_form_inherit_student" model="ir.ui.view">
+    <record id="invoice_creation_form_view" model="ir.ui.view">
         <field name="name">account.move.form.inherit</field>
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form"/>
@@ -11,7 +11,7 @@
         </field>
     </record>
 
-    <record id="hostel_facility_tree" model="ir.ui.view">
+    <record id="invoice_creation_tree_view" model="ir.ui.view">
         <field name="name">account.move.list.inherit</field>
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_tree"/>

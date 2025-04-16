@@ -58,14 +58,6 @@ class RoomManagement(models.Model):
             ])
             room.pending_amount = sum(pending_invoices.mapped('amount_residual'))
 
-    @api.model_create_multi
-    def create(self, vals_list):
-        """ Creates sequence number for rooms.."""
-        for vals in vals_list:
-            if vals.get('name', _('New')) == _('New'):
-                vals['name'] = (self.env['ir.sequence'].next_by_code('room.management'))
-        return super().create(vals_list)
-
     def action_partial(self):
         self.write({'state': "partial"})
 
@@ -76,7 +68,7 @@ class RoomManagement(models.Model):
         """Creates monthly invoices for students at the start of each month for the separate students in the room"""
         self.ensure_one()
 
-        product = self.env.ref('hostel_management.hostel_rental_product')
+        product = self.env.ref('hostel_management.product_rent_service')
         if not product:
             raise UserError("Rent product not found")
 
@@ -89,13 +81,12 @@ class RoomManagement(models.Model):
                 ('move_type', '=', 'out_invoice'),('invoice_date', '>=', start_of_month),], limit=1)
 
             if existing_invoice:
-                raise UserError("All the students have been invoiced for this month")
-
+                raise UserError("All the students in this room have been invoiced for this month")
 
             invoice_vals = [{
                 'partner_id': student.partner_id.id,
                 'move_type': 'out_invoice',
-                'invoice_date': date.today(),
+                'invoice_date': today,
                 'currency_id': self.currency_id.id,
                 'student_id': student.id,
                 'invoice_line_ids': [
@@ -103,11 +94,26 @@ class RoomManagement(models.Model):
                         'product_id': product.id,
                         'name': "Rent for " + str(self.name) + " - " + str(student.name),
                         'quantity': 1,
-                        'price_unit': self.total_rent + product.price,
+                        'price_unit': self.total_rent + product.lst_price,
                     }),
                 ]
             }]
             invoice = self.env['account.move'].create(invoice_vals)
             invoices.append(invoice.id)
 
-        return invoices
+        return {
+            'type' : 'ir.actions.act_window',
+            'name' : 'Created Invoices',
+            'res_model' : 'account.move',
+            'view_mode' : 'list,form',
+            'domain' : [('id', 'in', invoices)]
+        }
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        """ Creates sequence number for rooms"""
+        for vals in vals_list:
+            if vals.get('name', _('New')) == _('New'):
+                vals['name'] = (self.env['ir.sequence'].next_by_code('room.management'))
+        return super().create(vals_list)
+

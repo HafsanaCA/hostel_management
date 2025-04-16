@@ -4,59 +4,118 @@
         <t t-call="web.html_container">
             <t t-call="web.external_layout">
                 <div class="page">
-                    <h2>Students Report</h2>
-                    <t t-if="data.get('student_id') and data.get('room_id') and docs">
-                        <p>Student:
-                            <t t-esc="docs[0]['name']"/>
-                        </p>
-                        <p>Room:
-                            <t t-esc="docs[0]['room_name']"/>
-                        </p>
+                    <h2 style="text-align:center;font-weight:700;font-size:45px;margin-bottom:40px;">
+                        Students Report
+                    </h2>
+                    <t t-if="data.get('room_id') or data.get('student_id')">
+                        <p><strong>Room:</strong><t t-esc="docs[0]['room_name']"/></p>
                     </t>
-                    <t t-elif="data.get('room_id') and docs">
-                        <p>Room:
-                            <t t-esc="docs[0]['room_name']"/>
-                        </p>
+                    <t t-if="data.get('student_id')">
+                        <p><strong>Student:</strong><t t-esc="docs[0]['name']"/></p>
                     </t>
-                    <t t-elif="data.get('student_id') and docs">
-                        <p>Student:
-                            <t t-esc="docs[0]['name']"/>
-                        </p>
-                    </t>
-                    <table class="table table-border" style="width: 100%;">
+                    <table class="table table-sm" style="width:100%;background-color:#F5F5F5;">
                         <thead>
                             <tr>
-                                <th>Sl.No</th>
-                                <th>Name</th>
-                                <th>Pending Amount</th>
-                                <th>Room</th>
-                                <th>Invoice Status</th>
+                                <th style="font-weight:700;padding:8px;">Sl.No</th>
+                                <t t-if="not data.get('student_id')">
+                                    <th style="font-weight:700;padding:8px;">Name</th>
+                                </t>
+                                <th style="font-weight:700;padding:8px;">Pending Amount</th>
+                                <t t-if="not data.get('room_id') and not data.get('student_id')">
+                                    <th style="font-weight:700;padding:8px;">Room</th>
+                                </t>
+                                <th style="font-weight:700;padding:8px;">Invoice Status</th>
                             </tr>
                         </thead>
                         <tbody style="padding: 5px;">
                             <t t-set="sl" t-value="1" />
                             <t t-foreach="docs" t-as="student">
                                 <tr>
-                                    <td style="padding: 5px;">
-                                        <t t-esc="sl"/>
-                                    </td>
-                                    <td>
-                                        <t t-esc="student['name']"/>
-                                    </td>
-                                    <td>
-                                        <t t-esc="student['pending_amount']"/>
-                                    </td>
-                                    <td>
-                                        <t t-esc="student['room_name']"/>
-                                    </td>
-                                    <td>
-                                        <t t-esc="student['invoice_status']"/>
-                                    </td>
+                                    <td><t t-esc="sl"/></td>
+                                    <t t-if="not data.get('student_id')">
+                                        <td><t t-esc="student['name']"/></td>
+                                    </t>
+                                    <td><t t-esc="student['pending_amount']"/></td>
+                                    <t t-if="not data.get('room_id') and not data.get('student_id')">
+                                        <td><t t-esc="student['room_name']"/></td>
+                                    </t>
+                                    <td><t t-esc="student['invoice_status']"/></td>
                                 </tr>
                                 <t t-set="sl" t-value="sl+1"/>
                             </t>
                         </tbody>
                     </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <template id="student_leave_report_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2 style="text-align:center;font-weight:700;font-size:45px;margin-bottom:40px;">
+                        Student's Leave Request Report
+                    </h2>
+                    <t t-if="len(docs) == 1">
+<!--                        <p><strong>Room:</strong> <t t-esc="docs[0]['room_name']"/></p>-->
+<!--                        <p><strong>Student:</strong> <t t-esc="docs[0]['student_name']"/></p>-->
+<!--                        <p><strong>Start Date:</strong> <t t-esc="docs[0]['arrival_date']"/></p>-->
+<!--                        <p><strong>End Date:</strong> <t t-esc="docs[0]['leave_date']"/></p>-->
+                        <table class="table table-sm" style="width:100%;background-color:#F5F5F5;">
+                            <thead>
+                                <tr>
+                                    <th style="font-weight:700;">SL.No</th>
+                                    <th style="font-weight:700;">Student</th>
+                                    <th style="font-weight:700;">Room</th>
+                                    <th style="font-weight:700;">Start Date</th>
+                                    <th style="font-weight:700;">End Date</th>
+                                    <th style="font-weight:700;">Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="docs" t-as="rec">
+                                    <tr>
+                                        <td><t t-esc="rec['sl_no']"/></td>
+                                        <td><t t-esc="rec['student_name']"/></td>
+                                        <td><t t-esc="rec['room_name']"/></td>
+                                        <td><t t-esc="rec['arrival_date']"/></td>
+                                        <td><t t-esc="rec['leave_date']"/></td>
+                                        <td><t t-esc="rec['duration']"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </t>
+                    <t t-if="len(docs) > 1">
+                        <table class="table table-sm" style="width:100%;background-color:#F5F5F5;">
+                            <thead>
+                                <tr>
+                                    <th style="font-weight:700;">SL.No</th>
+                                    <th style="font-weight:700;">Student</th>
+                                    <th style="font-weight:700;">Room</th>
+                                    <th style="font-weight:700;">Start Date</th>
+                                    <th style="font-weight:700;">End Date</th>
+                                    <th style="font-weight:700;">Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="docs" t-as="rec">
+                                    <tr>
+                                        <td><t t-esc="rec['sl_no']"/></td>
+                                        <td><t t-esc="rec['student_name']"/></td>
+                                        <td><t t-esc="rec['room_name']"/></td>
+                                        <td><t t-esc="rec['arrival_date']"/></td>
+                                        <td><t t-esc="rec['leave_date']"/></td>
+                                        <td><t t-esc="rec['duration']"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </t>
+                    <t t-if="len(docs) == 0">
+                        <p>No records found for the selected date range.</p>
+                    </t>
                 </div>
             </t>
         </t>

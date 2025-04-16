@@ -1,7 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo noupdate="1">
-    <record id="hostel_rental_product" model="rental.product">
+    <record id="product_rent_service" model="product.product">
         <field name="name">Rent</field>
-        <field name="price">1000</field>
+        <field name="sale_ok">True</field>
+        <field name="purchase_ok">False</field>
+        <field name="lst_price">2000</field>
+        <field name="standard_price">2000</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="type">service</field>
+        <field name="sale_line_warn">no-message</field>
     </record>
 </odoo>

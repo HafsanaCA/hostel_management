@@ -26,7 +26,6 @@ class LeaveRequest(models.Model):
                 lambda s: s.active and s.id != self.student_id.id
             )
 
-            if other_students_in_room == 0:
+            if not other_students_in_room:
                 self.env['cleaning.service'].create([{'room_id': room.id, }])
                 room.state = 'cleaning'
-

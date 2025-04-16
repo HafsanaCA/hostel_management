@@ -67,7 +67,7 @@
             </form>
         </field>
     </record>
-    <record id="hostel_student_info_tree" model="ir.ui.view">
+    <record id="hostel_student_info_tree_view" model="ir.ui.view">
         <field name="name">student.information.list</field>
         <field name="model">student.information</field>
         <field name="arch" type="xml">
@@ -79,7 +79,7 @@
             </list>
         </field>
     </record>
-    <record id="hostel_student_search_view" model="ir.ui.view">
+    <record id="hostel_student_info_search_view" model="ir.ui.view">
         <field name="name">student.information.search</field>
         <field name="model">student.information</field>
         <field name="arch" type="xml">

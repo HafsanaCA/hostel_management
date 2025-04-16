@@ -39,7 +39,7 @@
               action="action_leave_request_menu"/>
     <record id="action_rent_product_menu" model="ir.actions.act_window">
         <field name="name">Rental Products</field>
-        <field name="res_model">rental.product</field>
+        <field name="res_model">product.product</field>
         <field name="view_mode">list,form</field>
     </record>
     <menuitem id="hostel_rent_product_menu"
@@ -55,4 +55,32 @@
               name="Cleaning Service"
               parent="hostel_main_menu"
               action="action_cleaning_service_menu"/>
+    <menuitem id="menu_hostel_report"
+              name="Report"
+              parent="hostel_main_menu"
+              sequence="50"/>
+    <record id="action_student_wizard_menu" model="ir.actions.act_window">
+        <field name="name">Student Report</field>
+        <field name="res_model">student.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="hostel_management.view_student_wizard_form"/>
+    </record>
+    <menuitem id="menu_students_report"
+              name="Students Report"
+              parent="menu_hostel_report"
+              action="action_student_wizard_menu"
+              sequence="10"/>
+    <record id="action_leave_wizard_menu" model="ir.actions.act_window">
+        <field name="name">Leave Request Report</field>
+        <field name="res_model">leave.request.report</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="hostel_management.view_student_leave_report_form"/>
+    </record>
+    <menuitem id="menu_students_leave_report"
+              name="Students Leave Report"
+              parent="menu_hostel_report"
+              action="action_leave_wizard_menu"
+              sequence="10"/>
 </odoo>

@@ -52,7 +52,7 @@
             </form>
         </field>
     </record>
-    <record id="hostel_room_tree" model="ir.ui.view">
+    <record id="hostel_room_tree_view" model="ir.ui.view">
         <field name="name">room.management.list</field>
         <field name="model">room.management</field>
         <field name="arch" type="xml">
