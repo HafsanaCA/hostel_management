@@ -11,7 +11,7 @@ class LeaveRequest(models.Model):
     leave_date = fields.Date(string='Leave Date')
     status = fields.Selection(selection=[('new', 'New'), ('approved', 'Approved')], required=True, tracking=True,
                               default='new', readonly=True)
-    student_id = fields.Many2one("student.information", string="Student", required=True)
+    student_id = fields.Many2one("student.information", string="Student", required=True, default=lambda self: self.env.user)
     company_id = fields.Many2one('res.company', copy=False, string="Company",
                                  default=lambda self: self.env.user.company_id.id)
 

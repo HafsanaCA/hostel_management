@@ -12,7 +12,8 @@
                     <field name="leave_date" />
                 </group>
                 <footer>
-                    <button name="action_print_leave_report" string="Print PDF Report" type="object" class="btn-primary"/>
+                    <button name="action_print_leave_report" string="Print PDF" type="object" class="btn-primary"/>
+                    <button name="action_print_leave_xlsx" string="Print XLSX" type="object" class="btn-primary"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
