@@ -5,7 +5,6 @@ import xlsxwriter
 from odoo import models,fields
 from odoo.http import request
 
-
 class LeaveRequestReport(models.TransientModel):
     _name = 'leave.request.report'
     _description = 'Leave Request Report'
