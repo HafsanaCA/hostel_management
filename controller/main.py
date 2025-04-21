@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*-
 import json
 from odoo import http
-from odoo.http import content_disposition, request
+from odoo.http import content_disposition
 from odoo.tools import html_escape
+from odoo.http import request, Controller, route
+from datetime import datetime, date
+from dateutil.relativedelta import relativedelta
+import logging
+
+_logger = logging.getLogger(__name__)
 
 class XLSXReportController(http.Controller):
     @http.route('/xlsx_reports', type='http', auth='user',
@@ -31,3 +37,30 @@ class XLSXReportController(http.Controller):
                 'message': 'Odoo Server Error',
             }
             return request.make_response(html_escape(json.dumps(error)))
+
+class StudentRegistration(http.Controller):
+    @http.route(['/register'], type='http', auth='public', website=True)
+    def student_register_form(self, **kwargs):
+        available_rooms = request.env['room.management'].search([('state', 'in', ['empty', 'partial'])])
+        return request.render('hostel_management.student_registration_form', {
+            'rooms': available_rooms,
+        })
+
+    @http.route(['/register/submit'], type='http', auth='public', website=True, csrf=True)
+    def student_register_submit(self, **post):
+        room_id = post.get('room_id')
+        room = request.env['room.management'].sudo().browse(int(room_id)) if room_id else False
+        student_vals = {
+            'name': post.get('name'),
+            'email': post.get('email'),
+            'dob': post.get('dob'),
+            'receive_mail': True if post.get('receive_mail') == 'on' else False,
+            'room_id': post.get('room_id'),
+        }
+        student = request.env['student.information'].sudo().create(student_vals)
+        print("The student details are.......", student.read())
+        if room.state != 'full':
+            room.write({
+                'occupied_beds': room.occupied_beds + 1
+            })
+        return request.render('hostel_management.student_register_success')

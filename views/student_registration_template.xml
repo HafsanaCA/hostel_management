@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="student_registration_form" name="Student Registration">
+        <t t-call="website.layout">
+            <section class="breadcrumb-section py-5" style="background-color: #646363;">
+                <div class="container">
+                    <h2 class="mb-0" style="color:white;">Student Registration</h2>
+                </div>
+            </section>
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6">
+                        <form action="/register/submit" method="post" enctype="multipart/form-data" data-mark="*"
+                              data-model_name="" data-success-page="">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="form-group" style="margin-bottom:20px;">
+                                <label>Name</label>
+                                <input type="text" name="name" required="required" class="form-control"
+                                       style="border: 1px solid #c9c8c8;"/>
+                            </div>
+                            <div class="form-group" style="margin-bottom:20px;">
+                                <label>Email</label>
+                                <input type="email" name="email" required="required" class="form-control"
+                                       style="border: 1px solid #c9c8c8;"/>
+                            </div>
+                            <div class="form-group" style="margin-bottom:20px;">
+                                <label>Date of Birth</label>
+                                <input type="date" name="dob" required="required" class="form-control"
+                                       style="border: 1px solid #c9c8c8;"/>
+                            </div>
+                            <div class="form-group" style="margin-bottom:20px;">
+                                <label>Room</label>
+                                <select name="room_id" required="required" class="form-control"
+                                        style="border: 1px solid #c9c8c8;">
+                                    <t t-foreach="rooms" t-as="room">
+                                        <option t-att-value="room.id">
+                                            <t t-esc="room.name"/> - <t t-esc="room.room_type"/>
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="form-check my-2" style="margin-bottom:20px;">
+                                <input type="checkbox" name="receive_mail" class="form-check-input"
+                                       style="border: 1px solid #c9c8c8;"/>
+                                <label class="form-check-label">Receive Mails</label>
+                            </div>
+                            <div class="text-center mt-4 mb-4">
+                                <button type="submit" class="btn btn-primary">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="student_register_success" name="Student Registration Success">
+        <t t-call="website.layout">
+            <div class="container mt-5" style="text-align:center;">
+                <h1 style="margin-top:10%;font-weight:600;">Registration Successful..!</h1>
+                <p style="margin-bottom:20px;">Your student record has been registered successfully.</p>
+                <a href="/" class="btn btn-primary">Go to Homepage</a>
+            </div>
+        </t>
+    </template>
+</odoo>

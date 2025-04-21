@@ -81,7 +81,7 @@ class RoomManagement(models.Model):
                 ('move_type', '=', 'out_invoice'),('invoice_date', '>=', start_of_month),], limit=1)
 
             if existing_invoice:
-                raise UserError("All the students in this room have been invoiced for this month")
+                raise UserError("All the students in this room hae been invoiced for this month")
 
             invoice_vals = [{
                 'partner_id': student.partner_id.id,
@@ -116,4 +116,3 @@ class RoomManagement(models.Model):
             if vals.get('name', _('New')) == _('New'):
                 vals['name'] = (self.env['ir.sequence'].next_by_code('room.management'))
         return super().create(vals_list)
-

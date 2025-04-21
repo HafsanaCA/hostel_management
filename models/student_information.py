@@ -79,6 +79,12 @@ class StudentInformation(models.Model):
             if vals.get('student', _('New')) == _('New'):
                 vals['student'] = (self.env['ir.sequence'].next_by_code('student.information'))
 
+            if not vals.get('user_id'):
+                vals['user_id'] = self.env.uid
+
+            if not vals.get('company_id'):
+                vals['company_id'] = self.env.user.company_id.id
+
             partner_vals = {
                 'name': vals.get('name'),
                 'email': vals.get('email'),
