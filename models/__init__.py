@@ -5,4 +5,3 @@ from . import hostel_facility
 from . import leave_request
 from . import account_move
 from . import cleaning_service
-from . import student_registration

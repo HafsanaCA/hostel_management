@@ -6,9 +6,6 @@ from odoo.tools import html_escape
 from odoo.http import request, Controller, route
 from datetime import datetime, date
 from dateutil.relativedelta import relativedelta
-import logging
-
-_logger = logging.getLogger(__name__)
 
 class XLSXReportController(http.Controller):
     @http.route('/xlsx_reports', type='http', auth='user',
@@ -40,7 +37,7 @@ class XLSXReportController(http.Controller):
 
 class StudentRegistration(http.Controller):
     @http.route(['/register'], type='http', auth='public', website=True)
-    def student_register_form(self, **kwargs):
+    def student_register_form(self):
         available_rooms = request.env['room.management'].search([('state', 'in', ['empty', 'partial'])])
         return request.render('hostel_management.student_registration_form', {
             'rooms': available_rooms,
@@ -50,10 +47,24 @@ class StudentRegistration(http.Controller):
     def student_register_submit(self, **post):
         room_id = post.get('room_id')
         room = request.env['room.management'].sudo().browse(int(room_id)) if room_id else False
+        existing_student = request.env['student.information'].sudo().search([('email', '=', post.get('email'))], limit=1)
+
+        if existing_student:
+            return request.render('hostel_management.student_registration_form', {
+                'error_message': "A student with this email already exists.",
+            })
+
+        dob = post.get('dob')
+        age = 0
+        if dob:
+                dob_date = datetime.strptime(dob, '%Y-%m-%d').date()
+                age = relativedelta(date.today(), dob_date).years
+
         student_vals = {
             'name': post.get('name'),
             'email': post.get('email'),
-            'dob': post.get('dob'),
+            'dob': dob,
+            'age': age,
             'receive_mail': True if post.get('receive_mail') == 'on' else False,
             'room_id': post.get('room_id'),
         }

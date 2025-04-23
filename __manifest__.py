@@ -2,7 +2,7 @@
 {
     'name': "Hostel Management",
     'version': '1.0',
-    'depends': ['base','mail', 'product', 'account', 'sale_management'],
+    'depends': ['base','mail', 'product', 'account', 'sale_management','website'],
     'author': "Bessie Porter",
     'description': """
     This is a Hostel Management System
@@ -23,6 +23,7 @@
         'views/account_move.xml',
         'views/cleaning_service.xml',
         'views/student_registration_template.xml',
+        'views/hostel_room_snippet_template.xml',
         'report/ir_actions_report.xml',
         'report/hostel_report_template.xml',
         'wizard/student_report_wizard.xml',
@@ -33,10 +34,13 @@
         'security/ir.model.access.csv',
     ],
     'assets': {
-            'web.assets_backend': [
-                'hostel_management/static/src/js/action_manager.js',
-            ],
-        },
+        'web.assets_backend': [
+            'hostel_management/static/src/js/action_manager.js',
+        ],
+        # 'web.assets_frontend': [
+        #     'hostel_management/static/src/xml/hostel_room_snippet_template.xml',
+        # ],
+    },
 
     'demo': [],
     'installable': True,
