@@ -4,9 +4,7 @@
         <section class="categories_section">
             <div class="container">
                 <div class="alert alert-info">
-                    <h4>Your Category Highlight Tab snippet will be displayed here...
-                        Please save to view the snippet
-                    </h4>
+                    <h3 style="text-align:center;">Latest Available Rooms</h3>
                 </div>
             </div>
         </section>

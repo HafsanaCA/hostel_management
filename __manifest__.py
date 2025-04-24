@@ -37,9 +37,10 @@
         'web.assets_backend': [
             'hostel_management/static/src/js/action_manager.js',
         ],
-        # 'web.assets_frontend': [
-        #     'hostel_management/static/src/xml/hostel_room_snippet_template.xml',
-        # ],
+        'web.assets_frontend': [
+            '/hostel_management/static/src/xml/latest_rooms_content.xml',
+            'hostel_management/static/src/js/latest_room.js',
+        ],
     },
 
     'demo': [],
