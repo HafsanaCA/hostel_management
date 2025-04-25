@@ -24,6 +24,7 @@
         'views/cleaning_service.xml',
         'views/student_registration_template.xml',
         'views/hostel_room_snippet_template.xml',
+        'views/room_detailed_page.xml',
         'report/ir_actions_report.xml',
         'report/hostel_report_template.xml',
         'wizard/student_report_wizard.xml',
@@ -38,8 +39,9 @@
             'hostel_management/static/src/js/action_manager.js',
         ],
         'web.assets_frontend': [
-            '/hostel_management/static/src/xml/latest_rooms_content.xml',
             'hostel_management/static/src/js/latest_room.js',
+            '/hostel_management/static/src/xml/latest_rooms_content.xml',
+            'hostel_management/static/src/css/room_style.css',
         ],
     },
 

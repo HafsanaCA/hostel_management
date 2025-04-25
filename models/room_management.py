@@ -23,6 +23,7 @@ class RoomManagement(models.Model):
         selection=[('empty', 'Empty'), ('partial', 'Partial'), ('cleaning', 'Cleaning'), ('full', 'Full')],
         string='Status', required=True, tracking=True, default='empty', readonly=True, compute='_compute_state',
         store=True)
+    image = fields.Binary()
     occupied_beds = fields.Integer(string="Occupied Beds", default=0)
     facility_ids = fields.Many2many(comodel_name='hostel.facility', string='Facilities')
     student_ids = fields.One2many('student.information', 'room_id', string="Students")

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="room_detail_template">
+        <t t-name="hostel_management.room_detail_template">
+            <style>
+            .room-card {
+                border-radius: 15px;
+                overflow: hidden;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                display: flex;
+                flex-wrap: wrap;
+                padding: 30px;
+            }
+
+            .room-image {
+                width: 100%;
+                max-height: 350px;
+                object-fit: cover;
+                border-radius: 10px;
+            }
+
+            .room-title {
+                color: #2c3e50;
+                font-weight: 700;
+                font-size: 1.8rem;
+                margin-bottom: 1rem;
+            }
+
+            .room-list li {
+                border: none;
+                padding: 6px 0;
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+
+            .room-badge {
+                background-color: #f5f5f5;
+                color: #fff;
+                font-size: 0.9rem;
+                border-radius: 20px;
+                padding: 8px 14px;
+                display: inline-block;
+                margin: 4px;
+            }
+
+            .back-button {
+                background-color: #9d7492;
+                color: #fff;
+                margin-top: 20px;
+                border: none;
+                padding: 10px 24px;
+                border-radius: 5px;
+                text-decoration: none;
+                transition: background-color 0.3s ease;
+            }
+
+            .back-button:hover {
+                background-color: #714b67;
+            }
+
+            .room-details {
+                padding-left: 30px;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+            }
+
+            .room-content {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            </style>
+
+            <section class="container py-5">
+                <div class="card room-card">
+                    <div class="row g-0 room-content">
+                        <div class="col-md-5 d-flex align-items-center justify-content-center p-3">
+                            <t t-if="room.image">
+                                <img t-att-src="'data:image/png;base64,' + room.image.decode('utf-8')"
+                                     class="img-fluid room-image"
+                                     alt="Room Image"/>
+                            </t>
+                            <t t-else="">
+                                <img src="/theme_og_store/static/src/img/default_category.svg"
+                                     class="img-fluid room-image"
+                                     alt="Default Room Image"/>
+                            </t>
+                        </div>
+
+                        <!-- Details column -->
+                        <div class="col-md-7 room-details">
+                            <h2 class="room-title">
+                                <t t-esc="room.name"/>
+                            </h2>
+                            <ul class="list-group room-list mb-3">
+                                <li><strong>Room Type:</strong><t t-esc="room.room_type"/></li>
+                                <li><strong>No. of Beds:</strong><t t-esc="room.beds"/></li>
+                                <li><strong>Rent:</strong><t t-esc="room.rent"/></li>
+                                <li><strong>Total Rent:</strong><t t-esc="room.total_rent"/></li>
+                            </ul>
+                            <h5>Facilities</h5>
+                            <t t-foreach="room.facility_ids" t-as="facility">
+                                <span class="room-badge">
+                                    <i class="fa fa-check-circle me-1"> </i>
+                                    <t t-esc="facility.name"/>
+                                </span>
+                            </t>
+                            <div class="mt-4">
+                                <a href="/" class="back-button">← Back to Rooms</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </t>
+    </template>
+</odoo>

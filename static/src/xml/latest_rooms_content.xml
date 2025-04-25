@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<odoo>
-    <templates xml:space="preserve">
-        <t t-name="hostel_management.category_data">
-            <section class="categories_section">
-                <div class="container">
-                    <h3 class="section_heading">Latest Available Rooms</h3>
-                    <div class="categories_wrapper">
+<templates xml:space="preserve">
+    <t t-name="hostel_management.category_data">
+        <section class="categories_section py-5">
+            <div class="container">
+                <h3 class="section_heading text-center mb-5">Latest Available Rooms</h3>
+                <div class="categories_wrapper">
+                    <div class="row">
                         <t t-foreach="result.latest_rooms" t-as="room" t-key="room.id">
-                            <div class="categories">
-                                <div class="type">
-                                      <strong>Name:</strong> <t t-esc="room.name"/><br/>
-                                      <strong>Room Type:</strong> <t t-esc="room.room_type"/><br/>
-                                      <strong>No.of Beds:</strong> <t t-esc="room.beds"/><br/>
-                                      <strong>Rent:</strong> <t t-esc="room.rent"/><br/>
-                                      <strong>Total Rent:</strong> <t t-esc="room.total_rent"/><br/>
+                            <div class="col-md-4 mb-4">
+                                <a t-attf-href="/room/{{ room.id }}" class="text-decoration-none text-dark">
+                                    <div class="card shadow-sm rounded h-100">
+                                    <div class="img_wrapper position-relative text-center p-3">
+                                        <t t-if="room.image">
+                                            <img t-att-src="'data:image/png;base64,' + room.image"
+                                                 class="img-fluid rounded room-image"
+                                                 t-att-alt="room.name or 'Room Image'"
+                                                 loading="lazy"/>
+                                        </t>
+                                        <t t-else="">
+                                            <img src="/theme_og_store/static/src/img/default_category.svg"
+                                                 class="img-fluid rounded room-image"
+                                                 alt="Default Room Image"
+                                                 loading="lazy"/>
+                                        </t>
+                                    </div>
+                                    <div class="card-body">
+                                          <p style="text-align:center"><strong><t t-esc="room.name"/></strong> </p>
+                                    </div>
                                 </div>
+                                </a>
                             </div>
                         </t>
                     </div>
                 </div>
-            </section>
-        </t>
-    </templates>
-</odoo>
+            </div>
+        </section>
+    </t>
+</templates>
 
 
 

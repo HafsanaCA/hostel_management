@@ -14,9 +14,13 @@
                     <button name="action_create_monthly_invoice" string="Monthly Invoice" type="object"/>
                 </header>
                 <sheet>
-                    <h1>
-                        <field name="name"/>
-                    </h1>
+                    <div>
+                        <field name="image" nolabel="1" widget="image" class="oe_avatar"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <br> </br>
                     <group>
                         <group>
                             <field name="room_type"/>
