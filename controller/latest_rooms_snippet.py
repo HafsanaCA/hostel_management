@@ -9,7 +9,7 @@ class WebsiteRooms(http.Controller):
         """Get the latest 4 rooms for the snippet."""
         latest_rooms = request.env['room.management'].sudo().search_read([('state', 'in', ['empty', 'partial'])],
                                   fields=['name', 'room_type', 'beds', 'rent', 'total_rent','id', 'image'],
-                                  order='create_date desc', limit=4)
+                                  order='create_date desc')
         values = {
             'latest_rooms': latest_rooms,
         }

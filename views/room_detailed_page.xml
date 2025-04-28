@@ -3,47 +3,45 @@
     <template id="room_detail_template">
         <t t-name="hostel_management.room_detail_template">
             <style>
-            .room-card {
+                .room-card {
                 border-radius: 15px;
                 overflow: hidden;
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
                 display: flex;
                 flex-wrap: wrap;
                 padding: 30px;
-            }
+                margin-top:40px;
+                }
 
-            .room-image {
+                .room-image {
                 width: 100%;
-                max-height: 350px;
+                height: 460px;
                 object-fit: cover;
                 border-radius: 10px;
-            }
+                }
 
-            .room-title {
+                .room-title {
                 color: #2c3e50;
                 font-weight: 700;
                 font-size: 1.8rem;
-                margin-bottom: 1rem;
-            }
+                }
 
-            .room-list li {
+                .room-list li {
                 border: none;
-                padding: 6px 0;
+                padding: 3px 0;
                 font-size: 1rem;
-                line-height: 1.7;
-            }
+                line-height: 1.9;
+                }
 
-            .room-badge {
-                background-color: #f5f5f5;
-                color: #fff;
+                .room-badge {
+                color: black;
                 font-size: 0.9rem;
                 border-radius: 20px;
                 padding: 8px 14px;
-                display: inline-block;
-                margin: 4px;
-            }
+                margin-left:30px;
+                }
 
-            .back-button {
+                .back-button {
                 background-color: #9d7492;
                 color: #fff;
                 margin-top: 20px;
@@ -52,24 +50,23 @@
                 border-radius: 5px;
                 text-decoration: none;
                 transition: background-color 0.3s ease;
-            }
+                }
 
-            .back-button:hover {
+                .back-button:hover {
                 background-color: #714b67;
-            }
+                }
 
-            .room-details {
-                padding-left: 30px;
+                .room-details {
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
-            }
+                }
 
-            .room-content {
+                .room-content {
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: space-between;
-            }
+                }
             </style>
 
             <section class="container py-5">
@@ -88,26 +85,23 @@
                             </t>
                         </div>
 
-                        <!-- Details column -->
-                        <div class="col-md-7 room-details">
-                            <h2 class="room-title">
-                                <t t-esc="room.name"/>
-                            </h2>
+                        <div class="col-md-7 room-details" style="margin-left:50px;">
+                            <h2 class="room-title" style="margin-top:-5px;"><t t-esc="room.name"/></h2>
                             <ul class="list-group room-list mb-3">
-                                <li><strong>Room Type:</strong><t t-esc="room.room_type"/></li>
-                                <li><strong>No. of Beds:</strong><t t-esc="room.beds"/></li>
-                                <li><strong>Rent:</strong><t t-esc="room.rent"/></li>
-                                <li><strong>Total Rent:</strong><t t-esc="room.total_rent"/></li>
+                                <li><strong>Room Type : </strong><t t-esc="room.room_type"/></li>
+                                <li><strong>No. of Beds : </strong><t t-esc="room.beds"/></li>
+                                <li><strong>Rent : </strong><t t-esc="room.rent"/></li>
+                                <li><strong>Total Rent : </strong><t t-esc="room.total_rent"/></li>
                             </ul>
-                            <h5>Facilities</h5>
+                            <h3 style="color: #2c3e50;">Facilities</h3>
                             <t t-foreach="room.facility_ids" t-as="facility">
-                                <span class="room-badge">
-                                    <i class="fa fa-check-circle me-1"> </i>
-                                    <t t-esc="facility.name"/>
+                                <span class="room-badge" style="margin-bottom:10px;">
+                                    <strong><t t-esc="facility.name"/></strong>
                                 </span>
                             </t>
-                            <div class="mt-4">
-                                <a href="/" class="back-button">← Back to Rooms</a>
+                            <br> </br>
+                            <div>
+                                <a href="/" class="back-button">Back to Rooms</a>
                             </div>
                         </div>
                     </div>
