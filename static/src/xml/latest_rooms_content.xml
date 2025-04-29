@@ -4,35 +4,61 @@
         <section class="categories_section py-5">
             <div class="container">
                 <h3 class="section_heading text-center mb-5">Latest Available Rooms</h3>
-                <div class="categories_wrapper">
-                    <div class="row">
-                        <t t-foreach="result.latest_rooms" t-as="room" t-key="room.id">
-                            <div class="col-md-3 mb-4">
-                                <a t-attf-href="/room/{{ room.id }}" class="text-decoration-none text-dark">
-                                    <div class="card shadow-sm rounded h-100">
-                                    <div class="img_wrapper position-relative text-center p-3">
-                                        <t t-if="room.image">
-                                            <img t-att-src="'data:image/png;base64,' + room.image"
-                                                 class="img-fluid rounded room-image"
-                                                 t-att-alt="room.name or 'Room Image'"
-                                                 loading="lazy"/>
-                                        </t>
-                                        <t t-else="">
-                                            <img src="/theme_og_store/static/src/img/default_category.svg"
-                                                 class="img-fluid rounded room-image"
-                                                 alt="Default Room Image"
-                                                 loading="lazy"/>
-                                        </t>
-                                    </div>
-                                    <div class="card-body">
-                                          <p style="text-align:center"><strong><t t-esc="room.name"/></strong></p>
-                                    </div>
+                <div t-attf-id="carousel{{ uniqueId }}" class="container carousel slide" data-bs-ride="carousel"
+                     t-att-data-bs-interval="interval">
+                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                        <t t-foreach="room_chunks" t-as="chunk" t-key="chunk.id">
+                            <div t-att-class="chunk.is_active ? 'carousel-item active' : 'carousel-item'">
+                                <div class="row">
+                                    <t t-foreach="chunk" t-as="room" t-key="room.id">
+                                        <div class="block span3 col-3">
+                                            <div class="card-group">
+                                                <div class="card" style="border:1px solid #f4f4f4;">
+                                                    <a t-attf-href="/room/{{ room.id }}"
+                                                       class="text-decoration-none text-dark">
+                                                        <div class="card shadow-sm rounded h-100">
+                                                            <div class="img_wrapper position-relative text-center p-3">
+                                                                <t t-if="room.image">
+                                                                    <img t-att-src="'data:image/png;base64,' + room.image"
+                                                                         class="img-fluid rounded room-image"
+                                                                         t-att-alt="room.name or 'Room Image'"
+                                                                         loading="lazy"/>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <img src="/theme_og_store/static/src/img/default_category.svg"
+                                                                         class="img-fluid rounded room-image"
+                                                                         alt="Default Room Image"
+                                                                         loading="lazy"/>
+                                                                </t>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                  <p style="text-align:center;">
+                                                                      <strong><t t-esc="room.name"/></strong>
+                                                                  </p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </t>
                                 </div>
-                                </a>
                             </div>
                         </t>
                     </div>
                 </div>
+                <a t-attf-href="#carousel{{ uniqueId }}" class="carousel-control-prev" data-bs-slide="prev"
+                   role="button"
+                   aria-label="Previous" title="Previous">
+                    <span class="fa fa-chevron-circle-left fa-2x" style="color:grey;"/>
+                    <span class="visually-hidden">Previous</span>
+                </a>
+                <a t-attf-href="#carousel{{ uniqueId }}" class="carousel-control-next" data-bs-slide="next"
+                   role="button"
+                   aria-label="Next" title="Next">
+                    <span class="fa fa-chevron-circle-right fa-2x" style="color:grey;"/>
+                    <span class="visually-hidden">Next</span>
+                </a>
             </div>
         </section>
     </t>
