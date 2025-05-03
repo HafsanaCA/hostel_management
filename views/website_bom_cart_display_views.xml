@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="product_cart_lines" inherit_id="website_sale.cart_lines" active="True">
+        <xpath expr="//div[@name='o_wsale_cart_line_button_container']" position="inside">
+            <t t-if="line.product_id.bom_ids">
+                <div class="bom-details mt-4">
+                    <strong>Components for <t t-esc="line.product_id.display_name"/>:</strong>
+                    <ul>
+                        <t t-foreach="line.product_id.bom_ids[0].bom_line_ids" t-as="bom_line">
+                            <li>
+                                <t t-esc="bom_line.product_id.display_name"/> (Qty: <t t-esc="bom_line.product_qty"/>)
+                            </li>
+                        </t>
+                    </ul>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>
+
