@@ -1,7 +1,6 @@
 from odoo import http
 from odoo.http import request
-import logging
-_logger = logging.getLogger(__name__)
+
 
 class WebsiteRooms(http.Controller):
     @http.route('/get_latest_rooms', auth="public", type='json', website=True)
