@@ -6,14 +6,33 @@
         <field name="inherit_id" ref="website.res_config_settings_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//block[@id='website_settings']" position="inside">
-                    <div class="col-12 col-lg-6 o_setting_box">
-                        <div class="o_setting_right_pane">
-                            <label for="bom_product_ids" />
-                            <div class="text-muted">Select products whose BoM should be shown in the cart</div>
-                            <field name="bom_product_ids" widget="many2many_tags" />
-                        </div>
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_right_pane">
+                        <label for="bom_product_ids"/>
+                        <div class="text-muted">Select products whose BoM should be shown in the cart</div>
+                        <field name="bom_product_ids" widget="many2many_tags"/>
                     </div>
+                </div>
             </xpath>
         </field>
     </record>
+    <record id="view_pos_config_discount_settings" model="ir.ui.view">
+        <field name="name">res.config.settings.view.inherit.pos.discount</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='pos_pricing_section']" position="after">
+                <div class="row mt16 o_settings_container">
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <label for="max_discount_amount"/>
+                            <div class="text-muted">Maximum discount limit allowed in POS</div>
+                            <field name="max_discount_amount"/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
 </odoo>
