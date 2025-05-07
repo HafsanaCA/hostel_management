@@ -2,7 +2,7 @@
 {
     'name': "Hostel Management",
     'version': '1.0',
-    'depends': ['base','mail', 'product', 'account','website', 'website_sale'],
+    'depends': ['base','mail', 'product', 'account','website', 'website_sale','point_of_sale'],
     'author': "Bessie Porter",
     'description': """
     This is a Hostel Management System
@@ -44,6 +44,9 @@
             'hostel_management/static/src/js/latest_room.js',
             '/hostel_management/static/src/xml/latest_rooms_content.xml',
             'hostel_management/static/src/css/room_style.css',
+        ],
+        'point_of_sale._assets_pos': [
+            'hostel_management/static/src/js/discount_limit.js',
         ],
     },
 
