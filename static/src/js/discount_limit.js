@@ -6,40 +6,45 @@ import { PaymentScreen } from "@point_of_sale/app/screens/payment_screen/payment
 
 patch(PaymentScreen.prototype, {
     async validateOrder(isForceValidate) {
-        console.log("runninggggg......");
+        console.log("Validating Order...");
 
         const order = this.currentOrder;
-        console.log("Current Order:", order);
+        const discountProductId = this.pos.config.discount_product_id?.id;
 
-        const maxDiscount = this.pos.pos_session ? this.pos.pos_session.max_discount_amount || 0 : 0;
-        console.log("Max Discount Amount:", maxDiscount);
+        const rawMax = this.pos.config.max_discount_amount;
+        const maxDiscount = parseFloat(rawMax) || 50.0;
+        console.log("Max Discount Amount (Configured or Default):", maxDiscount);
 
-        const orderTotal = order.get_total_with_tax();
+        let currentOrderDiscount = 0;
+        order.get_orderlines().forEach((line) => {
+            const product = line.get_product();
+            const isDiscount = product?.id === discountProductId && line.get_unit_price() < 0;
+            if (isDiscount) {
+                currentOrderDiscount += Math.abs(line.get_unit_price() * line.get_quantity());
+            }
+        });
 
-        const globalDiscountPercentage = order.discount || 0;
-        const globalDiscountAmount = (orderTotal * (globalDiscountPercentage / 100)) || 0;
+        console.log("Current Order Discount:", currentOrderDiscount);
 
-        console.log("Global Discount Calculation:");
-        console.log("Order Total:", orderTotal);
-        console.log("Global Discount Percentage:", globalDiscountPercentage);
-        console.log("Global Discount Amount:", globalDiscountAmount, "Max Allowed:", maxDiscount);
+        if (typeof this.pos.sessionDiscountTotal !== "number") {
+            this.pos.sessionDiscountTotal = 0;
+        }
 
-        if (globalDiscountAmount > maxDiscount) {
-            console.log("Discount limit exceeded! Showing the popup...");
-            this.env.services.dialog.add(AlertDialog, {
+        const totalDiscountWithThis = this.pos.sessionDiscountTotal + currentOrderDiscount;
+        console.log("Cumulative Discount (This + Previous):", totalDiscountWithThis, "Limit:", maxDiscount);
+
+        if (totalDiscountWithThis > maxDiscount) {
+            await this.env.services.dialog.add(AlertDialog, {
                 title: _t("Discount Limit Exceeded"),
                 body: _t(
-                    `Total discount of ${globalDiscountAmount.toFixed(2)} exceeds the allowed maximum of ${maxDiscount.toFixed(2)}.`
+                    `The total discount in this session (${totalDiscountWithThis.toFixed(2)}) exceeds the maximum allowed (${maxDiscount.toFixed(2)}). You cannot give more discounts.`
                 ),
             });
             return false;
         }
 
-        if (super.validateOrder) {
-            console.log("Calling super.validateOrder...");
-            return await super.validateOrder(...arguments);
-        } else {
-            console.error("super.validateOrder is not defined");
-        }
+        this.pos.sessionDiscountTotal += currentOrderDiscount;
+
+        return super.validateOrder(...arguments);
     }
 });

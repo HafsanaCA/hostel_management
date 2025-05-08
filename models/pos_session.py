@@ -13,3 +13,4 @@ class PosSession(models.Model):
         max_discount = config_param.get_param('hostel_management.max_discount_amount', default='0.0')
         for session in self:
             session.max_discount_amount = float(max_discount)
+
