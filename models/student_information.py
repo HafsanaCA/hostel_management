@@ -2,7 +2,7 @@
 from odoo import models, fields, api, _
 from datetime import date
 from dateutil.relativedelta import relativedelta
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import UserError
 
 
 class StudentInformation(models.Model):

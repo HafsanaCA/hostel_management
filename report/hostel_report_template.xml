@@ -58,10 +58,6 @@
                         Student's Leave Request Report
                     </h2>
                     <t t-if="len(docs) == 1">
-<!--                        <p><strong>Room:</strong> <t t-esc="docs[0]['room_name']"/></p>-->
-<!--                        <p><strong>Student:</strong> <t t-esc="docs[0]['student_name']"/></p>-->
-<!--                        <p><strong>Start Date:</strong> <t t-esc="docs[0]['arrival_date']"/></p>-->
-<!--                        <p><strong>End Date:</strong> <t t-esc="docs[0]['leave_date']"/></p>-->
                         <table class="table table-sm" style="width:100%;background-color:#F5F5F5;">
                             <thead>
                                 <tr>

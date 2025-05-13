@@ -18,7 +18,6 @@ class CleaningService(models.Model):
     def action_assign(self):
         """Assigns the cleaning request to the current user and sets the state to 'assigned' """
         self.ensure_one()
-
         self.write({
             'state': 'assigned',
             'cleaning_staff': self.env.user.id,

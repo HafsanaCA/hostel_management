@@ -10,8 +10,7 @@ from dateutil.relativedelta import relativedelta
 class XLSXReportController(http.Controller):
     @http.route('/xlsx_reports', type='http', auth='user',
                 csrf=False)
-    def get_report_xlsx(self, model, options, output_format, report_name,
-                        token='ads'):
+    def get_report_xlsx(self, model, options, output_format, report_name,token='ads'):
         """ Return data to python file passed from the javascript"""
         session_unique_id = request.session.uid
         report_object = request.env[model].with_user(session_unique_id)

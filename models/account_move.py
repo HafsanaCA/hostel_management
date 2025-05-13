@@ -13,5 +13,4 @@ class AccountMove(models.Model):
         if self.student_id.receive_mail:
             template = self.env.ref('hostel_management.email_template_invoice')
             template.send_mail(self.id, force_send=True)
-
         return res
