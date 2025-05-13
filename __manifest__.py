@@ -23,7 +23,6 @@
         'views/account_move.xml',
         'views/cleaning_service.xml',
         'views/student_registration_template.xml',
-        'views/res_config_settings_views.xml',
         'views/hostel_room_snippet_template.xml',
         'views/room_detailed_page.xml',
         'views/website_bom_cart_display_views.xml',
@@ -44,9 +43,6 @@
             'hostel_management/static/src/js/latest_room.js',
             '/hostel_management/static/src/xml/latest_rooms_content.xml',
             'hostel_management/static/src/css/room_style.css',
-        ],
-        'point_of_sale._assets_pos': [
-            'hostel_management/static/src/js/discount_limit.js',
         ],
     },
 

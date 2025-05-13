@@ -6,4 +6,3 @@ from . import leave_request
 from . import account_move
 from . import cleaning_service
 from . import res_config_settings
-from . import pos_session
