@@ -61,7 +61,7 @@ class StudentInformation(models.Model):
     def _compute_invoice_count(self):
         """Calculates invoice generated for each student"""
         for student in self:
-            student.invoice_count = self.env['account.move'].search_count([('student_id', '=', self.id)])
+            student.invoice_count = self.env['account.move'].search_count([('student_id', '=', student.id)])
 
     @api.onchange('dob')
     def _onchange_dob(self):
@@ -100,7 +100,7 @@ class StudentInformation(models.Model):
 
         return super().create(vals_list)
 
-    @api.model
+    @api.model_create_multi
     def create_user_from_student(self):
         """Creates a user automatically when a student record is created"""
         user_vals = {
@@ -148,4 +148,3 @@ class StudentInformation(models.Model):
             'res_model': 'account.move',
             'domain': [('student_id', '=', self.id)],
         }
-

@@ -26,6 +26,7 @@
         'views/hostel_room_snippet_template.xml',
         'views/room_detailed_page.xml',
         'views/website_bom_cart_display_views.xml',
+        'views/res_config_settings_views.xml',
         'report/ir_actions_report.xml',
         'report/hostel_report_template.xml',
         'wizard/student_report_wizard.xml',
